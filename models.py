@@ -1,8 +1,6 @@
-from datetime import datetime
-
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+# from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy.sql.schema import ForeignKey, Table
 from sqlalchemy.sql.sqltypes import DateTime
 
@@ -36,6 +34,7 @@ class Student(Base):
     name = Column(String(50), nullable=False)
     group_id = Column(Integer, ForeignKey(Group.id))
     groups = relationship('Group', backref='student')
+    subject = relationship('Subject', secondary=grade, backref='subjects')
 
 
 # Таблиця teachers з переліком вчителів
