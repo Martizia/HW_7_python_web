@@ -9,8 +9,8 @@ Base = declarative_base()
 
 
 # таблиця для зв'язку many-to-many між таблицями notes та tags
-grade = Table(
-    "grade",
+Grade = Table(
+    "grades",
     Base.metadata,
     Column("id", Integer, primary_key=True),
     Column("student_id", Integer, ForeignKey("students.id", ondelete="CASCADE")),
@@ -34,7 +34,7 @@ class Student(Base):
     name = Column(String(50), nullable=False)
     group_id = Column(Integer, ForeignKey(Group.id))
     groups = relationship('Group', backref='student')
-    subject = relationship('Subject', secondary=grade, backref='subjects')
+    subject = relationship('Subject', secondary=Grade, backref='subjects')
 
 
 # Таблиця teachers з переліком вчителів

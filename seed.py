@@ -1,11 +1,10 @@
 from faker import Faker
 import random
-from datetime import datetime
-from models import Base, Student, Teacher, Group, Subject, grade
+from models import Student, Teacher, Group, Subject, Grade
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine("postgresql://postgres:qwertY789@localhost/postgres")
+engine = create_engine("postgresql://postgres:qwertY789@localhost/hw7")
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -43,6 +42,6 @@ if __name__ == '__main__':
                             'value': random.randint(1, 100),
                             'date': fake.date_between(start_date='-1y', end_date='today')}
                            for _ in range(num_grades)]
-            session.execute(grade.insert(), grades_data)
+            session.execute(Grade.insert(), grades_data)
         session.commit()
     session.close()
